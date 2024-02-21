@@ -11,9 +11,12 @@ from django.utils.translation import gettext_lazy as _
 class CustomAccountManager(BaseUserManager):
     def create_superuser(self, email, username, password, **other_fields):
         """
-        Create a superuser with the given email, username, password, and other optional fields.
-        Validate the optional fields to ensure is_staff, is_superuser, and is_active are set to True.
-        Return the result of creating a user with the given parameters and optional fields.
+        Create a superuser with the given email, username,
+        password, and other optional fields.
+        Validate the optional fields to ensure is_staff,
+        is_superuser, and is_active are set to True.
+        Return the result of creating a user with the
+        given parameters and optional fields.
         """
         other_fields.setdefault("is_staff", True)
         other_fields.setdefault("is_superuser", True)
@@ -28,9 +31,12 @@ class CustomAccountManager(BaseUserManager):
 
     def create_user(self, email, username, password, **other_fields):
         """
-        Create a user with the given email, username, password, and other optional fields.
-        Validate the optional fields to ensure is_staff, is_superuser, and is_active are set to False.
-        Return the result of creating a user with the given parameters and optional fields.
+        Create a user with the given email, username, password,
+        and other optional fields.
+        Validate the optional fields to ensure is_staff, is_superuser,
+        and is_active are set to False.
+        Return the result of creating a user with the given
+        parameters and optional fields.
         """
 
         other_fields.setdefault("is_staff", False)
