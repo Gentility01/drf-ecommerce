@@ -1,8 +1,7 @@
 from django.utils.text import slugify
 from rest_framework import serializers
 
-from store.models import (Category, MyProductAttribute, Product, ProductReview,
-                          ProductWishList)
+from store.models import Category, Product
 from user.models import BaseUser
 
 

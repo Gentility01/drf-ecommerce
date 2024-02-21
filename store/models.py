@@ -1,8 +1,4 @@
-from random import choices
-
 import auto_prefetch
-# from django.forms import CharField
-from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils.html import mark_safe
@@ -13,6 +9,9 @@ from ecommerce.utils.choices import RATING, STATUS_CHOICES
 from ecommerce.utils.media import MediaHelper
 from ecommerce.utils.models import NamedTimeBasedModel, TimeBasedModel
 from user.models import BaseUser
+
+# from django.forms import CharField
+
 
 # from PIL import Image
 

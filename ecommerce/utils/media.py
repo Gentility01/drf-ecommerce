@@ -29,17 +29,17 @@ class MediaHelper:
         """generate upload path for images to prevent duplicate"""
         return MediaHelper._upload_path(model, "images", filename)
 
-    # @staticmethod
-    # def get_video_upload_path(model, filename):
-    #     """generate upload path for videos to prevent duplicate"""
-    #     return MediaHelper._upload_path(model, "videos", filename)
+    @staticmethod
+    def get_video_upload_path(model, filename):
+        """generate upload path for videos to prevent duplicate"""
+        return MediaHelper._upload_path(model, "videos", filename)
 
-    # @staticmethod
-    # def get_audio_upload_path(model, filename):
-    #     """generate audio path for audio to prevent duplicate"""
-    #     return MediaHelper._upload_path(model, "audio", filename)
+    @staticmethod
+    def get_audio_upload_path(model, filename):
+        """generate audio path for audio to prevent duplicate"""
+        return MediaHelper._upload_path(model, "audio", filename)
 
-    # @staticmethod
-    # def get_document_upload_path(model, filename):
-    #     """generate document path for audio to prevent duplicate"""
-    #     return MediaHelper._upload_path(model, f"documents/{now().date()}", filename)
+    @staticmethod
+    def get_document_upload_path(model, filename):
+        """generate document path for audio to prevent duplicate"""
+        return MediaHelper._upload_path(model, f"documents/{now().date()}", filename)

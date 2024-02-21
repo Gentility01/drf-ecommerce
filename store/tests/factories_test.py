@@ -1,6 +1,5 @@
 import factory
 import factory.fuzzy
-from factory import Faker, fuzzy
 from factory.django import DjangoModelFactory
 
 from backend.user.tests.factories_test import BaseUserFactory

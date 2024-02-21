@@ -1,10 +1,9 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
 from drf_spectacular.utils import extend_schema
 from rest_framework import generics, status
 from rest_framework.response import Response
 
-from store.models import (Category, MyProductAttribute, Product, ProductReview,
-                          ProductWishList)
+from store.models import Category, Product
 from user.models import BaseUser
 
 from .serializer import (BaseUserSerializer, CategorySerializer,
@@ -13,7 +12,7 @@ from .serializer import (BaseUserSerializer, CategorySerializer,
 # Create your views here.
 
 
-# ----------------------------------------------------------- User views -----------------------------------------------------------
+# ----------------------------- User views ----------------------------------------
 @extend_schema(tags=[" Drf User  List and Create"])
 class BaseUserListCreateApiView(generics.ListCreateAPIView):
     queryset = BaseUser.objects.all()
@@ -47,7 +46,7 @@ class BaseUserRetrieveUpdateView(generics.RetrieveUpdateAPIView):
 base_user_retrieve_update_view = BaseUserRetrieveUpdateView.as_view()
 
 
-# ----------------------------------------------------------- Category views -----------------------------------------------------------
+# --------------- Category views -----------------------------------------------------------
 @extend_schema(tags=[" Drf Category  List and Create"])
 class CategoryListCreateApiView(generics.ListCreateAPIView):
     """
@@ -79,7 +78,7 @@ class CategoryRetrieveUpdateView(generics.RetrieveUpdateAPIView):
 category_retrieveandupdate_view = CategoryRetrieveUpdateView.as_view()
 
 
-# ----------------------------------------------------------- Products views -----------------------------------------------------------
+# --------------------- Products views -------------------------------------------
 @extend_schema(tags=[" Drf Products  List and Create"])
 class ProductsListCreateApiView(generics.ListCreateAPIView):
     """
