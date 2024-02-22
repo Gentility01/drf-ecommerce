@@ -1,14 +1,24 @@
 from django.contrib import admin
 
+# fmt: off
 from .models import (Category, Color, Images, MyProductAttribute, Product,
                      ProductReview, ProductWishList, Size)
 
+# fmt: on
 # Register your models here.
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ["title", "slug", "category", "in_stalk", "in_active", "in_trending", "just_arrived"]
+    list_display = [
+        "title",
+        "slug",
+        "category",
+        "in_stalk",
+        "in_active",
+        "in_trending",
+        "just_arrived",
+    ]
 
 
 @admin.register(MyProductAttribute)

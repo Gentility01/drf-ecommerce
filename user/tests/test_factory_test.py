@@ -1,14 +1,13 @@
 import pytest
 from django.test import TestCase
 
-from backend.user.tests.factories_test import BaseUserFactory
 from user.models import BaseUser
+from user.tests.factories_test import BaseUserFactory
 
 pytestmark = pytest.mark.django_db
 
 
 class TestBaseUserSerializer(TestCase):
-
     def test_create_user(self):
         # Use the BaseUserFactory to create a new BaseUser instance
         user = BaseUserFactory.Base()

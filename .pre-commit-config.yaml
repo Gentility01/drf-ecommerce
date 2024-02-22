@@ -1,34 +1,46 @@
+exclude: '^docs/|^requirements/|^.*\/migrations\/|^pytest\.ini$|^requirements\.txt$|^\.pre-commit-config\.yaml$'
+
+default_stages: [commit]
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.4.0
     hooks:
-      - id: check-yaml
-        types: [file]
-      - id: end-of-file-fixer
-        types: [file]
       - id: trailing-whitespace
-        types: [file]
-      - id: check-json
-        types: [file]
-      - id: name-tests-test
-      #   types: [file]
-      # - id: requirements-txt-fixer
-        types: [file]
-      - id: name-tests-test
-        types: [file]
+      - id: end-of-file-fixer
+      # - id: check-json
+      - id: check-toml
+      - id: check-xml
+      - id: check-yaml
+      - id: debug-statements
+      - id: check-builtin-literals
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: detect-private-key
+
+  - repo: https://github.com/adamchainz/django-upgrade
+    rev: '1.14.0'
+    hooks:
+      - id: django-upgrade
+        args: ['--target-version', '4.2']
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.7.0
+    hooks:
+      - id: pyupgrade
+        args: [--py311-plus]
 
   - repo: https://github.com/psf/black
-    rev: 24.2.0
+    rev: 23.3.0
     hooks:
       - id: black
         args: [--line-length=120]
         types: [file]
 
-  - repo: https://github.com/pycqa/isort
+  - repo: https://github.com/PyCQA/isort
     rev: 5.12.0
     hooks:
       - id: isort
-        types: [file]
 
   - repo: https://github.com/PyCQA/flake8
     rev: 6.0.0
@@ -37,3 +49,15 @@ repos:
         additional_dependencies: [flake8-bugbear]
         types: [file]
         args: [--max-line-length=120]
+
+  # - repo: https://github.com/Riverside-Healthcare/djLint
+  #   rev: v1.31.1
+  #   hooks:
+  #     - id: djlint-reformat-django
+  #     - id: djlint-django
+
+# sets up .pre-commit-ci.yaml to ensure pre-commit dependencies stay up to date
+ci:
+  autoupdate_schedule: weekly
+  skip: []
+  submodules: false

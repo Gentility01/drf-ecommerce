@@ -1,5 +1,7 @@
+# fmt: off
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
                                         PermissionsMixin)
+# fmt: on
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -56,8 +58,8 @@ class BaseUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=300, unique=True)
     firstname = models.CharField(max_length=300, blank=True)
     thumbnail = models.FileField(default="/download (11).png/", upload_to="users/", null=True, blank=True)
+
     about = models.TextField(_("about"), max_length=200, blank=True)
-    # country = CountryField()
     phone = models.CharField(max_length=200, blank=True)
     post_code = models.CharField(max_length=200, blank=True)
     address_line1 = models.CharField(max_length=200, blank=True)

@@ -22,7 +22,12 @@ class BaseUserFactory:
                 extracted
                 if extracted
                 else Faker(
-                    "password", length=42, special_chars=True, digit=True, upper_case=True, lower_case=True
+                    "password",
+                    length=42,
+                    special_chars=True,
+                    digit=True,
+                    upper_case=True,
+                    lower_case=True,
                 ).evaluate(None, None, extra={"locale": None})
             )
             # Set the generated password for the instance

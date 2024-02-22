@@ -11,7 +11,16 @@ class BaseUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BaseUser
-        fields = ["id", "email", "username", "firstname", "password1", "password2", "created", "updated"]
+        fields = [
+            "id",
+            "email",
+            "username",
+            "firstname",
+            "password1",
+            "password2",
+            "created",
+            "updated",
+        ]
 
     def validate(self, data):
         """
@@ -45,7 +54,6 @@ class BaseUserSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Category
         fields = ["id", "name", "parent_category", "images", "slug"]

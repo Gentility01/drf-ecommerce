@@ -2,8 +2,8 @@ import factory
 import factory.fuzzy
 from factory.django import DjangoModelFactory
 
-from backend.user.tests.factories_test import BaseUserFactory
 from store.models import Category, Product
+from user.tests.factories_test import BaseUserFactory
 
 
 class CategoryFactory:

@@ -21,7 +21,7 @@ class ProductManager(models.Manager):
         """
         Return a filtered queryset of products that are inactive.
         """
-        return super(ProductManager, self).get_queryset().filter(in_active=True)
+        return super().get_queryset().filter(in_active=True)
 
 
 class Banner(TimeBasedModel):

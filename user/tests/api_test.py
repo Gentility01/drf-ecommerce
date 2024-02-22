@@ -2,26 +2,17 @@ import pytest
 from rest_framework.test import APITestCase
 
 from api.serializer import BaseUserSerializer
-from backend.user.tests.factories_test import BaseUserFactory
 from user.models import BaseUser
 
 pytestmark = pytest.mark.django_db
 
 
 class TestBaseUserSerializer(APITestCase):
-
-    def setUp(self):
-        BaseUser.objects.all().delete()
-
     def test_create_user(self):
-        # Create a BaseUser instance using the factory
-        user = BaseUserFactory.Base()
-
-        # Create a dictionary containing the user data
         user_data = {
-            "email": user.email,
-            "username": user.username,
-            "firstname": user.firstname,
+            "email": "robert94@example.org",
+            "username": "jacobgonzales",
+            "firstname": "Karen",
             "password1": "password123",
             "password2": "password123",
         }
@@ -43,9 +34,9 @@ class TestBaseUserSerializer(APITestCase):
         created_user = BaseUser.objects.get(id=user_instance.id)
 
         # Assertions
-        self.assertEqual(created_user.email, user.email)
-        self.assertEqual(created_user.username, user.username)
-        self.assertEqual(created_user.firstname, user.firstname)
+        self.assertEqual(created_user.email, "robert94@example.org")
+        self.assertEqual(created_user.username, "jacobgonzales")
+        self.assertEqual(created_user.firstname, "Karen")
 
         # Check that the password is correctly hashed
         self.assertTrue(created_user.check_password("password123"))

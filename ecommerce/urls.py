@@ -26,7 +26,11 @@ urlpatterns = [
     # path('adminlte/', include('django_adminlte.urls')),
     path("api/", include("api.urls")),
     path("api/schema", SpectacularAPIView.as_view(), name="schema"),
-    path("api/schema/docs", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
+    path(
+        "api/schema/docs",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
 ]
 
 if settings.DEBUG:

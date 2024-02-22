@@ -11,10 +11,8 @@ pytestmark = pytest.mark.django_db
 class CategoryTests(TestCase):
     def test_category_creation(self):
         category = CategoryFactory.Base()
-        print(category, category.slug)
 
         created_category = Category.objects.get(id=category.id)
-        print(created_category, created_category.slug)
         self.assertIsNotNone(category)
         self.assertIsNotNone(category.slug)
         assert created_category.slug == category.slug
