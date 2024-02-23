@@ -21,6 +21,9 @@ from django.contrib import admin
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
+# Creating a router object for user-related views
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     # path('adminlte/', include('django_adminlte.urls')),

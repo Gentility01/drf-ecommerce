@@ -1,7 +1,6 @@
-from django.shortcuts import get_object_or_404
+# fmt: off
 from drf_spectacular.utils import extend_schema
-from rest_framework import generics, status
-from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 
 from store.models import Category, Product
 from user.models import BaseUser
@@ -9,102 +8,125 @@ from user.models import BaseUser
 from .serializer import (BaseUserSerializer, CategorySerializer,
                          ProductsSerializer)
 
-# Create your views here.
 
-
-# ----------------------------- User views ----------------------------------------
-@extend_schema(tags=[" Drf User  List and Create"])
-class BaseUserListCreateApiView(generics.ListCreateAPIView):
+class BaseUserViewSet(ModelViewSet):  # noqa
     queryset = BaseUser.objects.all()
     serializer_class = BaseUserSerializer
 
-    def post(self, request, *args, **kwargs):
-        """
-        API endpoint that allows users list or create registration. typically for  user registration
-        A description of the post method, its parameters, and its return types.
-        """
+    @extend_schema(tags=["User"], summary="List base user", description="Retrieve a list of base users.")
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
 
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    @extend_schema(tags=["User"], summary="Create base user", description="Create a new base user.")
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    @extend_schema(tags=["User"], summary="Retrieve base user", description="Retrieve a specific base user by ID.")
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
+    @extend_schema(tags=["User"], summary="Update base user", description="Update a specific base user by ID.")
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
+
+    @extend_schema(
+        tags=["User"], summary="Partial update base user", description="Partially update a specific base user by ID."
+    )
+    def partial_update(self, request, *args, **kwargs):
+        return super().partial_update(request, *args, **kwargs)
+
+    @extend_schema(tags=["User"], summary="Delete base user", description="Delete a specific base user by ID.")
+    def destroy(self, request, *args, **kwargs):
+        return super().destroy(request, *args, **kwargs)
 
 
-base_user_list_create_api_view = BaseUserListCreateApiView.as_view()
-
-
-@extend_schema(tags=[" Drf User  Update and Delete"])
-class BaseUserRetrieveUpdateView(generics.RetrieveUpdateAPIView):
-    """
-    API endpoint that allows users retrieve or update."""
-
-    queryset = BaseUser.objects.all()
-    serializer_class = BaseUserSerializer
-
-
-base_user_retrieve_update_view = BaseUserRetrieveUpdateView.as_view()
-
-
-# --------------- Category views -----------------------------------------------------------
-@extend_schema(tags=[" Drf Category  List and Create"])
-class CategoryListCreateApiView(generics.ListCreateAPIView):
-    """
-    API endpoint that allow user list and create category for their Products"""
-
+class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
+    @extend_schema(tags=["Category"], summary="List all categories", description="List all categories")
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
 
-category_list_create_api_view = CategoryListCreateApiView.as_view()
+    @extend_schema(tags=["Category"], summary="Create category", description="Create a category")
+    def create(self, request, *args, **kwargs):
+        """
+        Create a new category.
+        """
+        return super().create(request, *args, **kwargs)
+
+    @extend_schema(tags=["Category"], summary="Retrieve category", description="Retrieve a paticular category.")
+    def retrieve(self, request, *args, **kwargs):
+        """
+        Retrieve a category.
+        """
+        return super().retrieve(request, *args, **kwargs)
+
+    @extend_schema(tags=["Category"], summary="Update Category", description="Update a category.")
+    def update(self, request, *args, **kwargs):
+        """
+        Update a category.
+        """
+        return super().update(request, *args, **kwargs)
+
+    @extend_schema(tags=["Category"], summary="Partial update Category", description="Update a category partially.")
+    def partial_update(self, request, *args, **kwargs):
+        """
+        Partially update a category.
+        """
+        return super().partial_update(request, *args, **kwargs)
+
+    @extend_schema(tags=["Category"], summary="Delete category", description="Delete a category.")
+    def destroy(self, request, *args, **kwargs):
+        """
+        Delete a category.
+        """
+        return super().destroy(request, *args, **kwargs)
 
 
-@extend_schema(tags=[" Drf Category  Retrieve and Update"])
-class CategoryRetrieveUpdateView(generics.RetrieveUpdateAPIView):
-    """
-    API endpoint that updates or retrieves category."""
-
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-
-    def get_object(self):
-        queryset = self.get_queryset()
-        slug = self.kwargs.get("slug")
-        obj = get_object_or_404(queryset, slug=slug)
-        self.check_object_permissions(self.request, obj)
-        return obj
-
-
-category_retrieveandupdate_view = CategoryRetrieveUpdateView.as_view()
-
-
-# --------------------- Products views -------------------------------------------
-@extend_schema(tags=[" Drf Products  List and Create"])
-class ProductsListCreateApiView(generics.ListCreateAPIView):
-    """
-    API endpoint that allow user list and create products"""
-
+class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductsSerializer
 
+    @extend_schema(tags=["Product"], summary="List all Product", description="List all products")
+    def list(self, request, *args, **kwargs):
+        """
+        List of prpoducts.
+        """
+        return super().list(request, *args, **kwargs)
 
-products_list_create_api_view = ProductsListCreateApiView.as_view()
+    @extend_schema(tags=["Product"], summary="Create product", description="Create a product")
+    def create(self, request, *args, **kwargs):
+        """
+        Create a new category.
+        """
+        return super().create(request, *args, **kwargs)
 
+    @extend_schema(tags=["Product"], summary="Retrieve  product", description="Retrieve a paticular product.")
+    def retrieve(self, request, *args, **kwargs):
+        """
+        Retrieve a a particular product using its id.
+        """
+        return super().retrieve(request, *args, **kwargs)
 
-@extend_schema(tags=[" Drf Products  Retrieve and Update"])
-class ProductsRetrieveUpdateView(generics.RetrieveUpdateAPIView):
-    """
-    API endpoint that updates or retrieves products."""
+    @extend_schema(tags=["Product"], summary="Update Product", description="Update a product.")
+    def update(self, request, *args, **kwargs):
+        """
+        Update a paticular product using its id.
+        """
+        return super().update(request, *args, **kwargs)
 
-    queryset = Product.objects.all()
-    serializer_class = ProductsSerializer
+    @extend_schema(tags=["Product"], summary="Partially update product", description="Update a product partially.")
+    def partial_update(self, request, *args, **kwargs):
+        """
+        Partially update a product.
+        """
+        return super().partial_update(request, *args, **kwargs)
 
-    def get_object(self):
-        queryset = self.get_queryset()
-        slug = self.kwargs.get("slug")
-        obj = get_object_or_404(queryset, slug=slug)
-        self.check_object_permissions(self.request, obj)
-        return obj
-
-
-products_retrieve_update_view = ProductsRetrieveUpdateView.as_view()
+    @extend_schema(tags=["Product"], summary="Delete product", description="Delete a product.")
+    def destroy(self, request, *args, **kwargs):
+        """
+        Delete a particular product with its id.
+        """
+        return super().destroy(request, *args, **kwargs)
+# fmt: on
