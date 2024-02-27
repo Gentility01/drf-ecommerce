@@ -1,4 +1,5 @@
-exclude: ^docs/|^requirements/|^.*\/migrations\/|^pytest\.ini$|^requirements\.txt$|^\.pre-commit-config\.yaml$|^settings/|^.*\.schema$|^.*\.(txt|yml|yaml|gitignore)$
+exclude: ^docs/|^requirements/|^.*\/migrations\/|^pytest\.ini$|^requirements\.txt$|^\.pre-commit-config\.yaml$|^settings/|^.*\.schema$|^.*\.(txt|yml|yaml|gitignore)$|^images/
+
 
 default_stages: [commit]
 
