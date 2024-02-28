@@ -42,8 +42,8 @@ class CustomAccountManager(BaseUserManager):
         """
 
         other_fields.setdefault("is_staff", False)
-        if other_fields.get("is_active") is not True:
-            raise ValueError("User must be assigned to is_active=True.")
+        # if other_fields.get("is_active") is not True:
+        #     raise ValueError("User must be assigned to is_active=True.")
         if not email:
             raise ValueError(_("User must have an email address."))
         email = self.normalize_email(email)
@@ -66,7 +66,7 @@ class BaseUser(AbstractBaseUser, PermissionsMixin):
     address_line2 = models.CharField(max_length=200, blank=True)
     town_city = models.CharField(max_length=200, blank=True)
     # user status
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

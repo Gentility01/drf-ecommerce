@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "drf_spectacular",
+    "djoser",
     # my apps
     "home",
     "store",
@@ -146,7 +147,7 @@ AUTH_USER_MODEL = "user.BaseUser"
 
 
 # -------------------------------------------ADMINLTE_MENU --------------------------------------------
-
+# https://adminlte.io/themes
 ADMINLTE_MENU = {
     "Menu Title": {
         "app": "ECOMMERCE AND API",
@@ -162,10 +163,43 @@ ADMINLTE_MENU = {
 }
 
 
-# ------------------------------------------DRF SPECTACULAR -----------------------------------------
+# ------------------------------------------DRF SPECTACULAR  and JWT -----------------------------------------
+# https://drf-spectacular.readthedocs.io/en/latest/readme.html#installation
+#  THE REST_FRAMEWORK IS USED FOR SPECTACULAR
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    # added default JWT authentication class from JWT
+    "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
 }
+
+# https://djoser.readthedocs.io/en/latest/settings.html
+
+SIMPLE_JWT = {"AUTH_HEADER_TYPES": (("JWT"),)}
+
+# https://drf-spectacular.readthedocs.io/en/latest/settings.html
 SPECTACULAR_SETTINGS = {
     "TITLE": "Ecommerce API",
+    "DESCRIPTION": "Ecommerce API the best api",
+}
+
+
+# ---------------------------------------------DJOSER ------------------------------------------------
+# https://djoser.readthedocs.io/en/latest/settings.html
+DJOSER = {
+    "LOGIN_FIELD": "email",
+    "USER_CREATE_PASSWORD_RETYPE": True,
+    "USERNAME_CHANGED_EMAIL_CONFIRMATION": True,
+    "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
+    "SEND_CONFIRMATION_EMAIL": True,
+    "SET_USERNAME_RETYPE": True,
+    "sET_PASSWORD_RETYPE": True,
+    "PASSWORD_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}",
+    "USERNAME_RESET_CONFIRM_URL": "email/username/reset/confirm/{uid}/{token}",
+    "ACTIVATION_URL": "activate/{uid}/{token}",
+    "SEND_ACTIVATION_EMAIL": False,
+    "SERIALIZERS": {
+        "user_create": "user.serializers.UserCreateSerializer",
+        "user": "user.serializers.UserCreateSerializer",
+        "user_delete": "djoser.serializers.UserDeleteSerializer",
+    },
 }

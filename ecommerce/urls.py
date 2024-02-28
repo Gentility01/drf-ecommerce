@@ -18,7 +18,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path  # ,re_path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 # Creating a router object for user-related views
@@ -26,7 +26,8 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    # path('adminlte/', include('django_adminlte.urls')),
+    path("auth/", include("djoser.urls")),  # used for  user registration
+    path("auth/", include("djoser.urls.jwt")),  # used for user login using jwt token
     path("api/", include("api.urls")),
     path("api/schema", SpectacularAPIView.as_view(), name="schema"),
     path(
