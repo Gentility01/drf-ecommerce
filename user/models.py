@@ -4,6 +4,10 @@ from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
 # fmt: on
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django_resized import ResizedImageField
+
+from ecommerce.utils.media import MediaHelper
+from ecommerce.utils.models import TimeBasedModel
 
 # from django_countries.fields import CountryField
 
@@ -53,12 +57,13 @@ class CustomAccountManager(BaseUserManager):
         return user
 
 
-class BaseUser(AbstractBaseUser, PermissionsMixin):
+class BaseUser(AbstractBaseUser, PermissionsMixin, TimeBasedModel):
     email = models.EmailField(_("email_address"), unique=True)
     username = models.CharField(max_length=300, unique=True)
     firstname = models.CharField(max_length=300, blank=True)
-    thumbnail = models.FileField(default="/download (11).png/", upload_to="users/", null=True, blank=True)
-
+    thumbnail = ResizedImageField(
+        default="/download (11).png/", upload_to=MediaHelper.get_image_upload_path, verbose_name="Image"
+    )
     about = models.TextField(_("about"), max_length=200, blank=True)
     phone = models.CharField(max_length=200, blank=True)
     post_code = models.CharField(max_length=200, blank=True)
@@ -68,13 +73,15 @@ class BaseUser(AbstractBaseUser, PermissionsMixin):
     # user status
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
 
     objects = CustomAccountManager()
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
+
+    class Meta(TimeBasedModel.Meta):
+        base_manager_name = "prefetch_manager"
+        verbose_name_plural = "Users"
 
     def __str__(self):
         return self.email

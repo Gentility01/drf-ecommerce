@@ -167,14 +167,16 @@ ADMINLTE_MENU = {
 # https://drf-spectacular.readthedocs.io/en/latest/readme.html#installation
 #  THE REST_FRAMEWORK IS USED FOR SPECTACULAR
 REST_FRAMEWORK = {
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     # added default JWT authentication class from JWT
     "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 # https://djoser.readthedocs.io/en/latest/settings.html
 
-SIMPLE_JWT = {"AUTH_HEADER_TYPES": (("JWT"),)}
+SIMPLE_JWT = {
+    "AUTH_HEADER_TYPES": ("JWT",),
+}
 
 # https://drf-spectacular.readthedocs.io/en/latest/settings.html
 SPECTACULAR_SETTINGS = {
@@ -194,9 +196,9 @@ DJOSER = {
     "SET_USERNAME_RETYPE": True,
     "sET_PASSWORD_RETYPE": True,
     "PASSWORD_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}",
-    "USERNAME_RESET_CONFIRM_URL": "email/username/reset/confirm/{uid}/{token}",
+    "USERNAME_RESET_CONFIRM_URL": "email/reset/confirm/{uid}/{token}",
     "ACTIVATION_URL": "activate/{uid}/{token}",
-    "SEND_ACTIVATION_EMAIL": False,
+    "SEND_ACTIVATION_EMAIL": True,
     "SERIALIZERS": {
         "user_create": "user.serializers.UserCreateSerializer",
         "user": "user.serializers.UserCreateSerializer",
